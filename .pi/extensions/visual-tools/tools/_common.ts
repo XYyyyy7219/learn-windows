@@ -10,7 +10,7 @@
 
 import { spawn } from "node:child_process"
 import { tmpdir } from "node:os"
-import { basename, dirname, join } from "node:path"
+import { basename, dirname, join, delimiter } from "node:path"
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 
 // rsvg-convert lives under MacPorts (/opt/local/bin); magick/gs under
@@ -24,12 +24,19 @@ export const STAGING_ROOT = join(tmpdir(), "pi-visual-tools")
 export const FILES_DIRNAME = "viz"
 
 export const CHROME_CANDIDATES = [
+  process.env.LEARN_CHROME_PATH,
+  process.env.PUPPETEER_EXECUTABLE_PATH,
+  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  "/usr/bin/google-chrome",
+  "/usr/bin/chromium",
+  "/usr/bin/chromium-browser",
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   "/Applications/Chromium.app/Contents/MacOS/Chromium",
 ]
 
 export function findChrome(): string | undefined {
-  for (const c of CHROME_CANDIDATES) if (existsSync(c)) return c
+  for (const c of CHROME_CANDIDATES) if (c && existsSync(c)) return c
   return undefined
 }
 
@@ -46,7 +53,7 @@ export function run(
   opts: { cwd: string; timeoutMs: number; env?: Record<string, string> },
 ): Promise<RunResult> {
   return new Promise((resolveRun) => {
-    const augmentedPath = [...EXTRA_PATH, process.env.PATH ?? ""].join(":")
+    const augmentedPath = [...EXTRA_PATH, process.env.PATH ?? ""].join(delimiter)
     const child = spawn(cmd, args, {
       cwd: opts.cwd,
       env: { ...process.env, ...(opts.env ?? {}), PATH: augmentedPath },

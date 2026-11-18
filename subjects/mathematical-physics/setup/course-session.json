@@ -1,0 +1,18 @@
+{
+  "courseTitle": "Methods of Mathematical Physics",
+  "chapterTitle": "第一章",
+  "logFile": "Learning-Chapter-01.md",
+  "sessionId": "mathematical-physics-lesson-02",
+  "chapters": [
+    {
+      "chapterTitle": "学习主线",
+      "logFile": "Learning.md",
+      "sessionId": "mathematical-physics-lesson-01"
+    },
+    {
+      "chapterTitle": "第一章",
+      "logFile": "Learning-Chapter-01.md",
+      "sessionId": "mathematical-physics-lesson-02"
+    }
+  ]
+}

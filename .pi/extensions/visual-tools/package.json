@@ -1,0 +1,12 @@
+{
+  "name": "@learn/visual-tools",
+  "version": "0.1.0",
+  "description": "Rendering dependencies for the Windows Mermaid and SVG assistants.",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "11.4.2",
+    "@resvg/resvg-js": "2.6.2",
+    "puppeteer": "23.11.1"
+  }
+}

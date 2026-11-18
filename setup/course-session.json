@@ -1,0 +1,18 @@
+{
+  "courseTitle": "Atomic Physics",
+  "chapterTitle": "第一章",
+  "logFile": "Learning.md",
+  "sessionId": "atomic-physics-lesson-01",
+  "chapters": [
+    {
+      "chapterTitle": "第一章",
+      "logFile": "Learning.md",
+      "sessionId": "atomic-physics-lesson-01"
+    },
+    {
+      "chapterTitle": "第二章",
+      "logFile": "Learning-Chapter-02.md",
+      "sessionId": "atomic-physics-lesson-02"
+    }
+  ]
+}

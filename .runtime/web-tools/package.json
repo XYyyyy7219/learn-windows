@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@mozilla/readability": "0.6.0",
+    "linkedom": "0.18.14",
+    "turndown": "7.2.4",
+    "unpdf": "1.9.1"
+  }
+}

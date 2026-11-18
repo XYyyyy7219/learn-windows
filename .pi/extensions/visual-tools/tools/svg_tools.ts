@@ -21,6 +21,9 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent"
 import { Type } from "@sinclair/typebox"
+import { createRequire } from "node:module"
+import { fileURLToPath } from "node:url"
+import { dirname } from "node:path"
 import {
   applyEdit,
   existsSync,
@@ -57,7 +60,16 @@ async function renderSvg(svgPath: string, outPath: string, workDir: string) {
     timeoutMs: RENDER_TIMEOUT_MS,
   })
   if (magick.code === 0 && existsSync(outPath)) return { ok: true as const, res: magick }
-  return { ok: false as const, res: res.code !== null ? res : magick }
+  try {
+    const dependencyRoot = process.env.LEARN_VISUAL_DEPS_DIR ?? dirname(dirname(fileURLToPath(import.meta.url)))
+    const { Resvg } = createRequire(join(dependencyRoot, "package.json"))("@resvg/resvg-js")
+    const source = readFileSync(svgPath, "utf8")
+    const image = new Resvg(source, { fitTo: { mode: "zoom", value: 2 }, font: { loadSystemFonts: true } }).render()
+    writeFileSync(outPath, image.asPng())
+    return { ok: true as const, res: { code: 0, stdout: "Rendered with resvg", stderr: "", timedOut: false } }
+  } catch (error) {
+    return { ok: false as const, res: { code: 1, stdout: "", stderr: String(error), timedOut: false } }
+  }
 }
 
 export default function svgToolsExtension(pi: ExtensionAPI) {

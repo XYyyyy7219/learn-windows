@@ -1,0 +1,23 @@
+{
+  "courseTitle": "Theoretical Mechanics",
+  "chapterTitle": "第一章",
+  "logFile": "Learning-Chapter-01.md",
+  "sessionId": "theoretical-mechanics-lesson-02",
+  "chapters": [
+    {
+      "chapterTitle": "学习主线",
+      "logFile": "Learning.md",
+      "sessionId": "theoretical-mechanics-lesson-01"
+    },
+    {
+      "chapterTitle": "第一章",
+      "logFile": "Learning-Chapter-01.md",
+      "sessionId": "theoretical-mechanics-lesson-02"
+    },
+    {
+      "chapterTitle": "第二章",
+      "logFile": "Learning-Chapter-02.md",
+      "sessionId": "theoretical-mechanics-lesson-03"
+    }
+  ]
+}

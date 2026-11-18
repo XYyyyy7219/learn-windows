@@ -107,7 +107,14 @@ export default function mdLog(pi: ExtensionAPI) {
 		);
 	}
 
-	function assistantBlock(text: string): string {
+	function assistantBlock(text: string, stopReason?: string): string {
+		// Failed or interrupted text can end inside a math/code block. Keep the
+		// original in the Pi session, but never let it corrupt the reading log.
+		if (stopReason === "aborted" || stopReason === "error" || stopReason === "length") {
+			return callout("warning", "PI — 输出未完成", [
+				"本轮输出因中断、错误或长度限制未完成；未完成正文不写入阅读日志。原始输出保留在 Pi 会话记录中。",
+			]);
+		}
 		return `> [!abstract] PI\n\n${text}`;
 	}
 
@@ -220,7 +227,7 @@ export default function mdLog(pi: ExtensionAPI) {
 				.map((c: any) => (c.text as string).trim())
 				.filter((t: string) => t.length > 0);
 			if (textParts.length === 0) return;
-			await withLock(() => appendToFile(assistantBlock(textParts.join("\n\n"))));
+			await withLock(() => appendToFile(assistantBlock(textParts.join("\n\n"), msg.stopReason)));
 			return;
 		}
 		// toolResult messages are handled by the tool_result event (for QA tools).
@@ -399,7 +406,7 @@ export default function mdLog(pi: ExtensionAPI) {
 					.filter((c: any) => c.type === "text")
 					.map((c: any) => (c.text as string).trim())
 					.filter((t: string) => t.length > 0);
-				if (textParts.length > 0) blocks.push(assistantBlock(textParts.join("\n\n")));
+				if (textParts.length > 0) blocks.push(assistantBlock(textParts.join("\n\n"), msg.stopReason));
 				continue;
 			}
 

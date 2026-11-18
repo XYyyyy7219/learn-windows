@@ -1,18 +1,17 @@
-# OS junk
-.DS_Store
-
-# Dependencies
 node_modules/
-
-# Environment
+.private/
+.obsidian/
 .env
 .env.*
-
-# Python
-__pycache__/
-*.pyc
-.venv/
-
-# Runtime state
-.memory/
+auth.json
 *.log
+*.pdf
+*.ppt
+*.pptx
+**/materials/
+**/materials-inspection/
+**/learning/
+**/viz/
+**/Materials.md
+**/Learning*.md
+/.runtime/pdf-tools/

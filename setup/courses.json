@@ -1,0 +1,25 @@
+{
+  "defaultCourseId": "mechanics",
+  "courses": [
+    {
+      "id": "atomic-physics",
+      "label": "原子物理 | Atomic Physics",
+      "workspace": "."
+    },
+    {
+      "id": "mechanics",
+      "label": "力学 | Mechanics",
+      "workspace": "subjects/mechanics"
+    },
+    {
+      "id": "theoretical-mechanics",
+      "label": "理论力学 | Theoretical Mechanics",
+      "workspace": "subjects/theoretical-mechanics"
+    },
+    {
+      "id": "mathematical-physics",
+      "label": "数学物理方法 | Methods of Mathematical Physics",
+      "workspace": "subjects/mathematical-physics"
+    }
+  ]
+}
