@@ -878,11 +878,11 @@ export default function quiz(pi: ExtensionAPI) {
 		name: "quiz",
 		label: "quiz",
 		description:
-			"Ask the user a GRADED question with a known correct answer, then instantly grade and give feedback. Unlike ask_user_question (which collects preferences/decisions with no right answer), quiz always has a correct answer supplied by you, marks the user's selection right/wrong (✓/✗), reveals the correct answer, and can show an explanation. Use it to (1) assess what the learner already understands before teaching, and (2) run tight practice/retrieval loops after explaining, or probe understanding whenever you're unsure they've got it. Options-only: single-select or multi-select, plus an automatic 'I don't know' choice so the user can signal a genuine gap instead of guessing. An always-present optional note field (Tab to focus it) lets the user attach a free-text note to ANY answer; it reaches you only when non-empty. No free-text answers — for non-graded questions use ask_user_question instead.",
+			"Run a graded single-select or multi-select check when the teaching plan calls for a quick diagnostic or supporting check. You supply the correct answer and explanation, and quiz reveals them after submission. Use ordinary chat for open explanations, calculations, and proofs. Quiz adds an 'I don't know' choice and an optional note field (Tab to focus it).",
 		promptSnippet:
-			"Use the quiz tool to test the user with a graded multiple-choice or multi-select question (required correct answer + required explanation). For non-graded questions, use ask_user_question.",
+			"Use quiz for a quick graded multiple-choice check when appropriate under the teaching skill. Use ordinary chat for open-ended assessment.",
 		promptGuidelines: [
-			"quiz is GRADED; ask_user_question is not. If the question has a correct answer, use quiz. If you just need a preference, decision, or open-ended input, use ask_user_question.",
+			"Use quiz only when choices provide useful evidence and the timing fits the teaching skill. Honor a learner's request to skip assessment. Use ask_user_question for preferences or clarification.",
 			'correctAnswer is REQUIRED and is the option value, not a position number. Single-select: one string (e.g. "mercury"). Multi-select: an array of strings (e.g. ["belize", "niue"]).',
 			"Always pass the option's `value` string as correctAnswer — it is self-checking and prevents miscounting positions. A value that matches no option is a hard error.",
 			"explanation is REQUIRED — always say why the correct answer is correct.",
@@ -895,7 +895,6 @@ export default function quiz(pi: ExtensionAPI) {
 			"Anti-guessing hygiene: don't let the correct answer stand out by form (longest, most precise, most hedged, or the only one in the right format). Keep options similar in length, specificity, and phrasing so it can't be picked from shape alone.",
 			"Set multiSelect: true only when more than one option is correct.",
 			"Options are shuffled before display by default, so don't worry about which position you list the correct answer in. Set shuffle: false only when option order is meaningful (ordered values, or an 'All/None of the above' option that must stay last).",
-			"To probe nuance, ask several quick quiz questions and adapt each one based on the previous answers, rather than writing one giant question.",
 			"Don't leak the answer through formatting: keep option phrasing/length even and don't hint which is correct.",
 		],
 		parameters: QuizParams,

@@ -1,6 +1,6 @@
 # learn-windows
 
-原项目 [amosblomqvist/learn](https://github.com/amosblomqvist/learn) 由 Amos Blomqvist 创建。原作者在 [How I Use AI to Learn Things](https://www.youtube.com/watch?v=kzcI5F4tGiU) 中介绍了这套教学系统。这里是个人维护的 Windows 原生适配，沿用原项目的探查、规划和教学流程。
+原项目 [amosblomqvist/learn](https://github.com/amosblomqvist/learn) 由 Amos Blomqvist 创建。原作者在 [How I Use AI to Learn Things](https://www.youtube.com/watch?v=kzcI5F4tGiU) 中介绍了这套教学系统。这里是个人维护的 Windows 原生适配，采用以教材为主线的 V2.1 教学与测评规则。
 
 在 Windows Terminal 中运行 Pi，按课程和章节保存会话，把 Markdown 学习记录交给 Obsidian 阅读。教学过程中可检索和阅读来源，也可生成 SVG、Mermaid 配图。
 
@@ -13,12 +13,18 @@
 
 从 Pi 中用 `/learn` 打开另一门课或另一个章节。仅用终端学习时，启动参数 `--no-obsidian` 可跳过打开阅读器。
 
+## V2.1 测评
+
+Pi 按教材组织章节、小节和知识单元，以小节结束为主要测评时机，分别记录概念理解、独立推导和解题应用的实际证据。测评轮到时输入「继续」开始，也可说「跳过测评」或「直接下一节」。
+
+推导和证明可用文字、LaTeX 或手写截图分段提交。提交完后说「我答完了」，也可在中途请求部分检查或提示。章末可主动请求练习试卷或模拟考试。学习证据随章节会话和 Markdown 回顾留存，跨会话汇总需要回看相关记录。
+
 ## 后续修改
 
 | 修改内容 | 文件位置 |
 | --- | --- |
-| 教学节奏、核查和测评约定 | `AGENTS.md` |
-| 教学方式和可视化流程 | `.pi/skills/` |
+| 全局学习约定 | `AGENTS.md` |
+| 教学节奏、测评与可视化流程 | `.pi/skills/` |
 | 研究与绘图助手模型 | `.pi/agents/` |
 | 教学窗口默认模型 | `setup/learning-model.mjs` 和 `.pi/settings.json` |
 | 课程与章节 | `setup/courses.json` 和各课程的 `setup/course-session.json` |
